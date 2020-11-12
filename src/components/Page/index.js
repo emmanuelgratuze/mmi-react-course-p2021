@@ -1,16 +1,14 @@
 import React from 'react'
-import Footer from '../Footer';
-import Menu from '../../components/Menu'
+import Player from '../Player';
 
 import './styles.css'
 
 const Page = (props) => {
   const { children } = props;
+
   return (
-    <div className="layout">
-
-      <Menu />
-
+    <div className="layout">      
+      <Player />
       {children}
     </div>
   )

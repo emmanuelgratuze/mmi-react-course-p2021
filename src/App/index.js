@@ -1,34 +1,21 @@
-import React from 'react'
-import AboutPage from '../pages/AboutPage'
-import ArtistPage from '../pages/ArtistPage'
-import LoginPage from '../pages/LoginPage'
-import HooksPage from '../pages/HooksPage'
+import React, { useState } from 'react'
+import ContextsPage from '../pages/ContextsPage'
 
-import {
-  BrowserRouter,
-  Switch,
-  Route
-} from "react-router-dom"
+import AppContext from './Context'
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/about">
-          <AboutPage />
-        </Route>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-        <Route path="/hooks">
-          <HooksPage />
-        </Route>
-        <Route path="/">
-          <ArtistPage />
-        </Route>
-      </Switch>
+  const [trackName, setTrackName] = useState();
 
-    </BrowserRouter>
+  const contextValue = {
+    appVersion: '1.0',
+    trackName: trackName,
+    setTrackName: setTrackName,
+  }
+  
+  return (
+    <AppContext.Provider value={contextValue}>
+      <ContextsPage />
+    </AppContext.Provider>
   )
 }
 
