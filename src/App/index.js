@@ -2,6 +2,7 @@ import React from 'react'
 import AboutPage from '../pages/AboutPage'
 import ArtistPage from '../pages/ArtistPage'
 import LoginPage from '../pages/LoginPage'
+import HooksPage from '../pages/HooksPage'
 
 import {
   BrowserRouter,
@@ -18,6 +19,9 @@ const App = () => {
         </Route>
         <Route path="/login">
           <LoginPage />
+        </Route>
+        <Route path="/hooks">
+          <HooksPage />
         </Route>
         <Route path="/">
           <ArtistPage />

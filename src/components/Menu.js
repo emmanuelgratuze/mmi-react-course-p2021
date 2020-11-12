@@ -21,6 +21,9 @@ const Menu = () => {
         <li>
           <Link to="/login">Login</Link>
         </li>
+        <li>
+          <Link to="/hooks">Hooks</Link>
+        </li>
       </ul>
     </div>
   )

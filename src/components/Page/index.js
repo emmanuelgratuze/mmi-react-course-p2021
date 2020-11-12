@@ -12,8 +12,6 @@ const Page = (props) => {
       <Menu />
 
       {children}
-
-      <Footer />
     </div>
   )
 }
