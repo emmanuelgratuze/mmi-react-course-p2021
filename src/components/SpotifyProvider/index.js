@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 import useDevice from './useDevice'
@@ -10,24 +10,27 @@ const spotifyApi = new SpotifyWebApi();
 
 const SpotifyProvider = ({ clientId, redirectUri, children }) => {
   useLoadSdk()
+  const [isReady, setIsReady] = useState(false)
   const token = useToken({ clientId, redirectUri })
   const { deviceId, player } = useDevice({ token })
   const contextValue = useMemo(() => ({
     deviceId,
     token,
     player,
-    spotifyApi
+    spotifyApi,
+    isReady
   }), [token, deviceId, player])
 
   useEffect(() => {
     if (token) {
-      spotifyApi.setAccessToken(token);
+      spotifyApi.setAccessToken(token)
+      setIsReady(true)
     }
   }, [token])
 
   return (
     <Context.Provider value={contextValue}>
-      {children}
+      {(isReady && deviceId) && children}
     </Context.Provider>
   )
 }

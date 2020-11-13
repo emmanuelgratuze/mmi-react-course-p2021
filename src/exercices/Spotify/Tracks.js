@@ -17,8 +17,8 @@ liste[&] // => 'value 2'
 
 
 const Tracks = () => {
-  const { spotifyApi } = useContext(SpotifyContext)
-  const [tracks, setTracks] = useState([]);
+  const { spotifyApi, deviceId } = useContext(SpotifyContext)
+  const [tracks, setTracks] = useState([])
 
   useEffect(() => {
     const loadTracks = async () => {
@@ -28,20 +28,36 @@ const Tracks = () => {
     loadTracks();
   }, [spotifyApi])
 
+  const playSound = (uri) => {
+    const data = {
+      "device_id": deviceId,
+      "uris": [ uri ]
+    }
+
+    spotifyApi.play(data)
+      .then(function() {
+        console.log('play')
+      })
+  }
+
   return (
     <div>
       Tracks
       <ul>
         {tracks.map((track) => {
           return (
-            <ul>
+            <li key={track.id}>
               <h3>{track.name}</h3>
               <h4>{track.album.name}</h4>
               <img
                 src={track.album.images[1].url}
                 alt={`Cover of ${track.album.name}`}
               />
-            </ul>
+              <br/>
+              <button onClick={() => { playSound(track.uri) }}>
+                Play
+              </button>
+            </li>
           )
         })}
       </ul>
